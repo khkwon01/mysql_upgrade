@@ -30,6 +30,8 @@
                   NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION
     - MySQL 8.0 : ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES, NO_ZERO_IN_DATE, NO_ZERO_DATE, ERROR_FOR_DIVISION_BY_ZERO,
                   NO_ENGINE_SUBSTITUTION
+- Data dictionary table 방식으로 통합
+    - system table(ex,mysql, performance_schema, etc)도 data dictionary 방식으로 변경
 
 ## 3. MySQL upgrade check in advance
 - mysql-shell
@@ -38,6 +40,16 @@
     - 체크시 warning, error이 발생하면 해당 사항에 대해서 조치를 진행 
 
 ## 4. MySQL upgrade procedure
-- install binary (신규설치)
+Upgrade 하기전에 먼저 기존 MySQL에 대한 백업은 꼭 진행함.
 
-- replace old packages with new (기존설치 대체)
+- install binary (신규설치, 권장)
+
+- replace old packages with new (기존설치 대체, In-Place Upgrade)
+  - 기존 MySQL binary (5.7) 백업
+  - 신규 MySQL binary (8.0.x) 대체
+  - 아래와 같이 upgrade 수행
+    - MySQL 8.0.16 이전 : MySQL start, mysql_upgrade 명령어 수행 (DBA 수동)
+    - MySQL 8.0.16 이후 : MySQL start
+  - 신규 변경된 MySQL로 restart 재진행 후 에러 발생 유무 확인
+  - upgrade후 application에서 사용하는 SQL 확인 및 test   
+
