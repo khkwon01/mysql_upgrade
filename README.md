@@ -40,7 +40,7 @@
     - 체크시 warning, error이 발생하면 해당 사항에 대해서 조치를 진행 
 
 ## 4. MySQL upgrade procedure
-Upgrade 하기전에 먼저 기존 MySQL에 대한 백업은 꼭 진행함.
+Upgrade 하기전에 먼저 기존 MySQL에 대한 백업은 꼭 진행해야 함. 아래 방식중 만약에 경우 장애 복구를 위해 신규설치를 권장
 
 - install binary (신규설치, 권장)
   - 구성 아키텍처   
