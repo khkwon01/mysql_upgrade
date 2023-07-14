@@ -46,6 +46,33 @@ Upgrade 하기전에 먼저 기존 MySQL에 대한 백업은 꼭 진행함.
   - 구성 아키텍처   
     Upgrade용 신규 MySQL를 구성한 후 데이터 이관 (mysqlsh), 데이터 replication를 통한 upgrade
     ![Alt text](image.png)
+  - 데이터 이관 
+    - 소스에서 데이터 export    
+      util.dumpInstance("/test", {dryRun: false, threads: 8}) — db 전체    
+      util.dumpSchemas(schemas, outputUrl[, options]) : 논리 스키마 (스키마, DB)    
+      util.dumpTables(schema, tables, outputUrl[, options]) : 테이블별     
+    - 타켓에서 데이터 import    
+      no-gtid : util.loadDump("/test”, {dryRun:false, threads:8, ignoreVersion:true})   
+      gtid : util.loadDump("/test”, {dryRun:false,threads:8,ignoreVersion:true,updateGtidSet:'replace'})  
+  - replication 구성
+    source에는 replication 계정을 생성해야 하고 replication 설정은 target에서 진행
+    - replication 계정생성 (소스)
+      ```
+      create user repl@'<<target ip>>' identified by 'repl';
+      grant replication slave on *.* to repl@'<<target ip>>';
+      ```  
+    - no-gtid (target)
+      ```
+      change master to master_user='repl', master_password='repl', master_host='<<source ip>>', master_port=3306, master_log_file='bin.000003', master_log_pos=1337831 for channel 'channel1';
+      start replica for channel 'channel1';
+      show replica status for channel 'channel1' \G;
+      ```
+    - gtid (target)
+      ```
+      change master to master_user='repl', master_password='repl', master_host='<<source ip>>', master_port=3318, master_auto_position=1 for channel 'channel1';
+      start replica for channel 'channel1';
+      show replica status for channel 'channel1' \G;
+      ```
 
 - replace old packages with new (기존설치 대체, In-Place Upgrade)
   - 기존 MySQL binary (5.7) 백업
