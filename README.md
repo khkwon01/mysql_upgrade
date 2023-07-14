@@ -83,3 +83,6 @@ Upgrade 하기전에 먼저 기존 MySQL에 대한 백업은 꼭 진행해야 �
   - 신규 변경된 MySQL로 restart 재진행 후 에러 발생 유무 확인
   - upgrade후 application에서 사용하는 SQL 확인 및 test   
 
+## 5. reference document
+- Upgrade 과정 : https://dev.mysql.com/doc/refman/8.0/en/upgrading-what-is-upgraded.html
+- MySQL 8.0 주요 변경 사항 : https://dev.mysql.com/doc/refman/8.0/en/upgrading-from-previous-series.html#upgrade-data-dictionary-changes
