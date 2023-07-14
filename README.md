@@ -43,6 +43,9 @@
 Upgrade 하기전에 먼저 기존 MySQL에 대한 백업은 꼭 진행함.
 
 - install binary (신규설치, 권장)
+  - 구성 아키텍처   
+    Upgrade용 신규 MySQL를 구성한 후 데이터 이관 (mysqlsh), 데이터 replication를 통한 upgrade
+    ![Alt text](image.png)
 
 - replace old packages with new (기존설치 대체, In-Place Upgrade)
   - 기존 MySQL binary (5.7) 백업
