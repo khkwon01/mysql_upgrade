@@ -9,11 +9,15 @@ Source(MySQL 5.7)를 제외하고는 아래 Delpoy를 아이콘을 클릭하여 
 위에 그림에서 MySQL 5.7에 해당 하는 부분은 직접 VM 인스턴스를 생성하여 MySQL 설치하여 구성함
 
 ## 1) VM 구성    
+Name과 Oracle Linux8 os, operator-subnet-regional subnet등을 선택하여 설치
 
-
-## 1) MySQL 5.7 Download
+## 2) MySQL 5.7 Download    
 wget https://dev.mysql.com/get/Downloads/MySQL-5.7/mysql-5.7.42-linux-glibc2.12-x86_64.tar
 
+## 3) MySQL Shell 설치   
+yum install -y mysql-shell  
+
+## 4) MySQL 5.7 설치
 
 
 # 3. Target 구성
